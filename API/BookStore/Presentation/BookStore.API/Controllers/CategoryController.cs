@@ -1,11 +1,12 @@
 ﻿using BookStore.Application.Commands.Categorys;
 using BookStore.Application.Queries.Categorys;
 using BookStore.Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Presentation.Controllers;
 
-// [Authorize]
+ [Authorize]
 
 public class CategoryController : BaseApiController
 {
@@ -66,7 +67,6 @@ public class CategoryController : BaseApiController
     [HttpPut("categories/{id:int}")]
     public async Task<IActionResult> UpdateCategoryAsync([FromRoute] int id, [FromBody] UpdateCategoryDTO model)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
         var result = await Mediator.Send(new UpdateCategory { Id = id, Category = model });
         return HandleResponse(result);
     }

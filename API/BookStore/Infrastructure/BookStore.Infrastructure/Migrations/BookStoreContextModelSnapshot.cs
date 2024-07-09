@@ -61,31 +61,31 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6176),
+                            CreatedDate = new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8398),
                             Description = "Books on poetry and verse",
                             Name = "The Complete Works of William Shakespeare",
                             Price = 15.99,
-                            UpdatedDate = new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6193)
+                            UpdatedDate = new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8415)
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6195),
+                            CreatedDate = new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8417),
                             Description = "Books on spiritual and religious topics",
                             Name = "The Holy Bible",
                             Price = 10.99,
-                            UpdatedDate = new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6196)
+                            UpdatedDate = new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8417)
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6197),
+                            CreatedDate = new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8419),
                             Description = "Books on science and technology",
                             Name = "The Origin of Species",
                             Price = 20.989999999999998,
-                            UpdatedDate = new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6197)
+                            UpdatedDate = new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8419)
                         });
                 });
 

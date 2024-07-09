@@ -8,9 +8,14 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Book, BookDTO>().ReverseMap();
+        // Map from Book entity to BookDTO and back
+        CreateMap<Book, BookDTO>()
+            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
+            .ReverseMap();
         CreateMap<CreateBookDTO, Book>();
         CreateMap<UpdateBookDTO, Book>();
+        
+        // Category
         CreateMap<Category, CategoryDTO>().ReverseMap();
         CreateMap<CreateCategoryDTO, Category>();
         CreateMap<UpdateCategoryDTO, Category>();

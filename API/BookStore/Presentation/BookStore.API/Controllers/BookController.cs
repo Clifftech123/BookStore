@@ -1,12 +1,12 @@
 ﻿using BookStore.Application.Commands.Book;
 using BookStore.Application.Queries.Books;
 using BookStore.Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Presentation.Controllers;
 
-//[Authorize]
-
+[   Authorize]
 public class BookController : BaseApiController
 {
     /// <summary>
@@ -17,10 +17,6 @@ public class BookController : BaseApiController
     [HttpPost("books")]
     public async Task<IActionResult> CreateBookAsync([FromBody] CreateBookDTO model)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         return Ok(await Mediator.Send(new CreateBook { Book = model }));
     }
 
@@ -56,12 +52,8 @@ public class BookController : BaseApiController
     /// <param name="model">The book data transfer object containing the updated book's details.</param>
     /// <returns>A response indicating the result of the update operation.</returns>
     [HttpPut("books")]
-    public async Task<IActionResult> UpdateBookAsync([FromBody] UpdateBookDTO model)
+    public async Task<IActionResult> UpdateBookAsync([FromBody] BookDTO model)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         return Ok(await Mediator.Send(new UpdateBook { Book = model }));
     }
 

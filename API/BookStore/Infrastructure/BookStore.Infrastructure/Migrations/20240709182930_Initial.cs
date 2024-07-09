@@ -211,9 +211,9 @@ namespace BookStore.Infrastructure.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedDate", "Description", "Name", "Price", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6176), "Books on poetry and verse", "The Complete Works of William Shakespeare", 15.99, new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6193) },
-                    { 2, 2, new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6195), "Books on spiritual and religious topics", "The Holy Bible", 10.99, new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6196) },
-                    { 3, 3, new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6197), "Books on science and technology", "The Origin of Species", 20.989999999999998, new DateTime(2024, 7, 9, 3, 29, 24, 410, DateTimeKind.Local).AddTicks(6197) }
+                    { 1, 1, new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8398), "Books on poetry and verse", "The Complete Works of William Shakespeare", 15.99, new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8415) },
+                    { 2, 2, new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8417), "Books on spiritual and religious topics", "The Holy Bible", 10.99, new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8417) },
+                    { 3, 3, new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8419), "Books on science and technology", "The Origin of Species", 20.989999999999998, new DateTime(2024, 7, 9, 18, 29, 28, 963, DateTimeKind.Local).AddTicks(8419) }
                 });
 
             migrationBuilder.CreateIndex(

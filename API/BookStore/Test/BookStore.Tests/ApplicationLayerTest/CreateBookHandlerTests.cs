@@ -24,7 +24,8 @@ public class CreateBookHandlerTests
 
         mockMapper.Setup(m => m.Map<Book>(It.IsAny<CreateBookDTO>())).Returns(book);
         mockMapper.Setup(m => m.Map<BookDTO>(It.IsAny<Book>())).Returns(bookDTO);
-        mockRepository.Setup(r => r.AddAsync(It.IsAny<Book>())).Returns((Task<Book>)Task.CompletedTask);
+        var expectedBook = new Book { /* Fill with expected data */ };
+        mockRepository.Setup(r => r.AddAsync(It.IsAny<Book>())).Returns(Task.FromResult(expectedBook));
 
         var handler = new CreateBook.CreateBookHandler(mockRepository.Object, mockMapper.Object);
 

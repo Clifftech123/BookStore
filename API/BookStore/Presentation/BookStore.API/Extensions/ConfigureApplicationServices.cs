@@ -74,8 +74,23 @@ public static partial class ConfigureApplicationServices
                 ValidAudience = jwtSettings["validAudience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
             };
+            o.Events = new JwtBearerEvents
+            {
+                OnChallenge = context =>
+                {
+                    context.HandleResponse();
+                    context.Response.StatusCode = 401;
+                    context.Response.ContentType = "application/json";
+                    var result = System.Text.Json.JsonSerializer.Serialize(new
+                    {
+                        message = "You are not authorized to access this resource. Please authenticate."
+                    });
+                    return context.Response.WriteAsync(result);
+                },
+            };
         });
     }
+    
 
     /// <summary>
     /// Configures global exception handling for the application, providing a uniform response structure for errors.

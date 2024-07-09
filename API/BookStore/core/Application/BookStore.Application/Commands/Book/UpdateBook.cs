@@ -9,8 +9,10 @@ namespace BookStore.Application.Commands.Book;
 
 public class UpdateBook : IRequest<BookDTO>
 {
-    public required  UpdateBookDTO Book { get; set; }
-    
+    public required BookDTO Book { get; set; }
+
+
+
     public class UpdateBookHandler : IRequestHandler<UpdateBook, BookDTO>
     {
         private readonly IBaseRepository<Domain.Entities.Book> _repository;
@@ -22,23 +24,11 @@ public class UpdateBook : IRequest<BookDTO>
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Handles the update of an existing book.
-        /// </summary>
-        /// <param name="request">The request containing the book to be updated.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>The updated book DTO.</returns>
         public async Task<BookDTO> Handle(UpdateBook request, CancellationToken cancellationToken)
         {
-            var existingBook = await _repository.GetByIdAsync(request.Book.Id);
-            if (existingBook == null)
-            {
-                throw new KeyNotFoundException($"Book with ID {request.Book.Id} not found.");
-            }
-
-            var bookToUpdate = _mapper.Map(request.Book, existingBook);
-            await _repository.UpdateAsync(bookToUpdate);
-            return _mapper.Map<BookDTO>(bookToUpdate);
+            var book = _mapper.Map<Domain.Entities.Book>(request.Book);
+            await _repository.UpdateAsync(book);
+            return request.Book;
         }
     }
 }

@@ -9,16 +9,45 @@ using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Interfaces;
 using BookStore.Infrastructure.Repositories;
 using BookStore.Presentation.Extensions;
+using BookStore.Presentation.middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NLog;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 // NLog configuration
 LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
+// Configure Swagger to include Bearer token input
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token in the following format: {your token here} do not add the word 'Bearer' before it."
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -73,12 +102,14 @@ app.UseAuthorization();
 
 app.UseSwagger();
 
-
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store Demon API");
 });
 
+
+// Register the custom middleware
+app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
 app.MapControllers();
 
 app.Run();

@@ -1,4 +1,5 @@
-﻿using BookStore.Infrastructure.Context;
+﻿using BookStore.Domain.Entities;
+using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +33,20 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
     }
 
     // Add the GetAllAsync method
-    public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().AsNoTracking().ToListAsync();
+    public async Task<IEnumerable<T>> GetAllAsync()
+    {
+        if (typeof(T) == typeof(Book))
+        {
+            return await _context.Set<T>()
+                .Include("Category")
+                .AsNoTracking()
+                .ToListAsync() as IEnumerable<T>;
+        }
+        else
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
+        }
+    }
 
     public async Task<T> GetByIdAsync(int id)
     {
