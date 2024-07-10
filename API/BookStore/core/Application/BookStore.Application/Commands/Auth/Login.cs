@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using BookStore.Application.Exceptions;
 
 namespace BookStore.Application.Commands.Auth;
 
@@ -39,7 +40,7 @@ public class Login : IRequest<object>
             if (user == null || !(await _userManager.CheckPasswordAsync(user, request.LoginDTO.Password)))
             {
                 _logger.LogWarn($"{nameof(Login)}: Login failed for email {request.LoginDTO.Email}. Incorrect credentials.");
-                return new { Message = "Login failed. Incorrect email or password." };
+               throw new UserNotFound("email", request.LoginDTO.Email);
             }
             var token = await CreateToken(user);
             return new

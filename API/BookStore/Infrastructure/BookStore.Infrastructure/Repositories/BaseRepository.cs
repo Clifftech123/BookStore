@@ -32,6 +32,23 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         return entity;
     }
 
+    
+    // Add the SearchBooksAsync  by it  name    
+
+    public async Task<IEnumerable<T>> SearchBooksAsync(string searchTerm)
+    {
+        if (typeof(T) == typeof(Book))
+        {
+            var books = await _context.Set<Book>()
+                .Where(b => EF.Functions.Like(b.Name, $"%{searchTerm}%"))
+                .ToListAsync();
+            return books as IEnumerable<T>;
+        }
+        else
+        {
+            throw new NotImplementedException("Search is only implemented for books.");
+        }
+    }
     // Add the GetAllAsync method
     public async Task<IEnumerable<T>> GetAllAsync()
     {

@@ -2,7 +2,7 @@
 
 namespace BookStore.Domain.DTO;
 
-public class BookDTO
+public record BookDTO
 {
     [JsonIgnore]
     public bool IsUpdateOperation { get; set; }

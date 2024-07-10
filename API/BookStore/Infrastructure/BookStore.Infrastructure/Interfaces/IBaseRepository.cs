@@ -8,5 +8,7 @@ public interface IBaseRepository<T>
     Task<T> AddAsync(T entity);
     Task<T> UpdateAsync(T entity);
     Task<T> DeleteAsync(T entity);
+    
+    Task<IEnumerable<T>> SearchBooksAsync(string searchTerm);
 
 }

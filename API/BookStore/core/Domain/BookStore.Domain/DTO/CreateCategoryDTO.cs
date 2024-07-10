@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain.DTO;
 
-public class CreateCategoryDTO
+public  record CreateCategoryDTO
 {
     
     public string Name { get; set; }
@@ -8,4 +8,4 @@ public class CreateCategoryDTO
     {
         get; set;
     }
-};
+}

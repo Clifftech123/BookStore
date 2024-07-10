@@ -46,6 +46,24 @@ public class BookController : BaseApiController
         return Ok(result);
     }
 
+
+    // <param name="searchTerm">The search term to use when searching for books.</param>
+ /// <param name="searchTerm"></param>
+ /// <returns> A reesponse fro the serch     </returns>
+   
+    [HttpGet("books/search/{searchTerm}")]
+    public async Task<IActionResult> SearchBooksAsync(string searchTerm)
+    {
+        var books = await Mediator.Send(new SearchBooksByName { SearchTerm = searchTerm }).ConfigureAwait(false);
+
+        if (books == null || !books.Any())
+        {
+            return NotFound(new { Message = "No books found matching your search criteria." });
+        }
+
+        return Ok(books);
+    }
+
     /// <summary>
     /// Updates a book.
     /// </summary>

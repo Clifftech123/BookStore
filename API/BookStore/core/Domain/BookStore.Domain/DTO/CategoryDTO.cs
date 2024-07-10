@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain.DTO;
 
-public class CategoryDTO
+public record CategoryDTO
 {
     public int Id { get; set; }
     public string Name { get; set; }
