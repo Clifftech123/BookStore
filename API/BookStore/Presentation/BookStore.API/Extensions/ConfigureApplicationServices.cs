@@ -17,16 +17,14 @@ public static partial class ConfigureApplicationServices
     /// </summary>
     /// <param name="services">The IServiceCollection to add services to.</param>
     /// <param name="configuration">The application configuration where URLs are defined.</param>
+ 
+   
     public static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
     {
-        var backendUrl = configuration["BackendUrl"] ?? "https://localhost:5052";
-        var frontendUrl = configuration["FrontendUrl"] ?? "https://localhost:7224";
-
         services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy
-            .WithOrigins(backendUrl, frontendUrl)
+            .AllowAnyOrigin()
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials()));
+            .AllowAnyHeader()));
     }
 
     /// <summary>

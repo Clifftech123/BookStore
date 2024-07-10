@@ -79,6 +79,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+app.UseCors("CorsPolicy");
+
 // Configure the HTTP request pipeline.
 var logger = app.Services.GetRequiredService<ILoggerManager>();
 app.ConfigureExceptionHandler(logger);
@@ -94,13 +96,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.UseSwagger();
+
 
 app.UseSwaggerUI(c =>
 {
